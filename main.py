@@ -12,8 +12,10 @@ async def main() -> None:
 
     async with async_playwright() as p:
         context, page = await criar_contexto(p)
- 
-        await page.goto(CFG.url_home)
+
+        await asyncio.sleep(3)
+        await page.goto(CFG.url_home, wait_until="domcontentloaded", timeout=60000)
+
         notifier.conectado()
         notifier.aguardar_login(CFG.login_wait)
 

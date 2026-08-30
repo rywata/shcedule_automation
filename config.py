@@ -6,7 +6,6 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class Config:
     url_home:        str   = "https://prenotami.esteri.it/"
-    firefox_profile: str   = os.path.expanduser("~/firefox-prenotami-profile")
     login_wait:      int   = 60
     refresh_min:     float = 8.0
     refresh_max:     float = 15.0

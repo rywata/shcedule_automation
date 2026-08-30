@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import asyncio
 
 
 class Notifier:
@@ -49,10 +50,11 @@ class Notifier:
 
     # ── Interação com o usuário ───────────────────────────────────────────────
 
-    def aguardar_login(self, segundos: int) -> None:
+    async def aguardar_login(self, segundos: int) -> None:
+        """Countdown assíncrono — não bloqueia o event loop."""
         for i in range(segundos, 0, -1):
             print(f"    Robô assume o controle em: {i:02d}s ", end="\r")
-            time.sleep(1)
+            await asyncio.sleep(1)
         print("\n\n>>> MONITORAMENTO ATIVADO!\n")
 
     def perguntar_reinicio(self) -> bool:
