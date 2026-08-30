@@ -17,7 +17,7 @@ async def main() -> None:
         await page.goto(CFG.url_home, wait_until="domcontentloaded", timeout=60000)
 
         notifier.conectado()
-        notifier.aguardar_login(CFG.login_wait)
+        await notifier.aguardar_login(CFG.login_wait)
 
         # ── Loop externo: reinicia após re-verificação ────────────────
         while True:
@@ -31,7 +31,7 @@ async def main() -> None:
             if resultado == Resultado.REVERIFICACAO:
                 if notifier.perguntar_reinicio():
                     notifier.info("\n>>> Reiniciando monitoramento...\n")
-                    notifier.aguardar_login(CFG.login_wait)
+                    await notifier.aguardar_login(CFG.login_wait)
                 else:
                     notifier.info("\n>>> Encerrando por escolha do usuário.")
                     break
