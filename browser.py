@@ -1,5 +1,5 @@
 import os
-from playwright.async_api import async_playwright, BrowserContext
+from playwright.async_api import BrowserContext
 from playwright_stealth import Stealth
 
 from config import CFG

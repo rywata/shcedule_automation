@@ -52,8 +52,7 @@ class Notifier:
     def aguardar_login(self, segundos: int) -> None:
         for i in range(segundos, 0, -1):
             print(f"    Robô assume o controle em: {i:02d}s ", end="\r")
-            import time as t
-            t.sleep(1)
+            time.sleep(1)
         print("\n\n>>> MONITORAMENTO ATIVADO!\n")
 
     def perguntar_reinicio(self) -> bool:

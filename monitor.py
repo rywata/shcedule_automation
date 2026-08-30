@@ -1,5 +1,6 @@
 import random
 import asyncio
+from typing import Optional
 from playwright.async_api import Page
 
 from config import CFG, Resultado
@@ -39,7 +40,7 @@ class Monitor:
                 await asyncio.sleep(5)
                 await self._voltar_home()
 
-    async def _ciclo(self) -> Resultado | None:
+    async def _ciclo(self) -> Optional[Resultado]:
         """
         Executa um ciclo de verificação.
         Retorna um Resultado se o loop deve encerrar, ou None para continuar.

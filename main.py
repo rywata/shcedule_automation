@@ -11,9 +11,8 @@ async def main() -> None:
     notifier = Notifier()
 
     async with async_playwright() as p:
-        context = await criar_contexto(p)
-        page    = context.pages[0] if context.pages else await context.new_page()
-
+        context, page = await criar_contexto(p)
+ 
         await page.goto(CFG.url_home)
         notifier.conectado()
         notifier.aguardar_login(CFG.login_wait)
