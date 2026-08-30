@@ -1,12 +1,16 @@
 import os
-from playwright.async_api import BrowserContext
+from typing import Tuple
+from playwright.async_api import BrowserContext, Page
 from playwright_stealth import Stealth
 
 from config import CFG
 
 
-async def criar_contexto(p) -> BrowserContext:
-    """Inicia o Firefox com perfil persistente e stealth ativado."""
+async def criar_contexto(p) -> Tuple[BrowserContext, Page]:
+    """
+    Inicia o Firefox com perfil persistente e stealth ativado.
+    Retorna o contexto E a página já com stealth aplicado.
+    """
     os.makedirs(CFG.firefox_profile, exist_ok=True)
 
     context = await p.firefox.launch_persistent_context(
@@ -17,8 +21,7 @@ async def criar_contexto(p) -> BrowserContext:
         viewport={"width": 1440, "height": 900},
     )
 
-    # Aplica stealth na primeira página (ou cria uma nova)
     page = context.pages[0] if context.pages else await context.new_page()
     await Stealth().apply_stealth_async(page)
 
-    return context
+    return context, page

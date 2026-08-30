@@ -72,7 +72,7 @@ class Monitor:
 
         # ── Re-verificação real (sessão expirada, captcha) ────────────
         if e_reverificacao(url, conteudo):
-            self.notifier.log("Re-verificação detectada!")
+            self.notifier.log(f"Re-verificação detectada!")
             return Resultado.REVERIFICACAO
 
         # ── Tudo normal: tenta reservar ───────────────────────────────

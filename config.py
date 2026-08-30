@@ -22,8 +22,10 @@ class Config:
     )
  
     triggers_reverificacao: tuple = (
-        "session expired", "sessione scaduta",
-        "captcha", "autenticazione", "verifica",
+        "session expired",
+        "sessione scaduta",
+        "la sessione è scaduta",
+        "accedi per continuare",
     )
  
     erros_servidor: tuple = (
