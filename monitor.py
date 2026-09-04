@@ -83,7 +83,7 @@ class Monitor:
         espera = random.uniform(CFG.refresh_min, CFG.refresh_max)
         self.notifier.log(f"Tentativa #{self.tentativas} — próxima em {espera:.1f}s...")
         await asyncio.sleep(espera)
-        await self.page.reload()
+        #await self.page.reload()
         return None
 
     async def _voltar_home(self) -> None:
