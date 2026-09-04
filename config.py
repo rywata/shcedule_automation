@@ -32,6 +32,8 @@ class Config:
         "não consegue atender",
         "Si è verificato un errore",
         "elaborazione della richiesta",
+        "Not Found",
+        "The requested URL was not found",
     )
  
  
