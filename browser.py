@@ -4,24 +4,23 @@ from typing import Tuple
 from playwright.async_api import BrowserContext, Page
 from playwright_stealth import Stealth
 
-FIREFOX_PROFILE = os.path.expanduser("~/firefox-novo-profile")
+CHROME_PROFILE = os.path.expanduser("~/chrome-prenotami-profile")
 
 
 async def criar_contexto(p) -> Tuple[BrowserContext, Page]:
-    os.makedirs(FIREFOX_PROFILE, exist_ok=True)
+    os.makedirs(CHROME_PROFILE, exist_ok=True)
 
-    context = await p.firefox.launch_persistent_context(
-        user_data_dir=FIREFOX_PROFILE,
+    context = await p.chromium.launch_persistent_context(
+        user_data_dir=CHROME_PROFILE,
         headless=False,
+        channel="chrome",
         locale="it-IT",
         timezone_id="Europe/Rome",
         viewport={"width": 1440, "height": 900},
-        firefox_user_prefs={
-            "toolkit.telemetry.enabled": False,
-            "datareporting.healthreport.uploadEnabled": False,
-            "browser.startup.page": 0,
-            "browser.startup.homepage": "about:blank",
-        },
+        args=[
+            "--disable-blink-features=AutomationControlled",
+            "--no-sandbox",
+        ],
     )
 
     await asyncio.sleep(2)
