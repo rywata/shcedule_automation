@@ -30,6 +30,18 @@ async def aguardar_oauth(page: Page, notifier: Notifier, timeout: int = 60) -> b
         return False
 
 
+async def clicar(page: Page, selector: str, timeout: int = 2000) -> bool:
+    """Clica em um elemento com jitter humano. Retorna True se clicou."""
+    try:
+        el = page.locator(selector).first
+        await el.wait_for(state="visible", timeout=timeout)
+        await asyncio.sleep(random.uniform(*CFG.click_jitter))
+        await el.click()
+        return True
+    except Exception:
+        return False
+
+
 async def tentar_reserva(page: Page, notifier: Notifier) -> bool:
     """
     Clica em Reservar e verifica o resultado.
