@@ -7,7 +7,7 @@ from detector import e_url_oauth
 from notifier import Notifier
 
 
-async def aguardar_oauth(page: Page, notifier: Notifier, timeout: int = 60) -> bool:
+async def aguardar_oauth(page: Page, notifier: Notifier, timeout: int = 120) -> bool:
     """Aguarda o redirect OAuth completar e retornar ao Prenotami."""
     if not e_url_oauth(page.url):
         return True
@@ -22,7 +22,11 @@ async def aguardar_oauth(page: Page, notifier: Notifier, timeout: int = 60) -> b
     await page.route("**/iam.esteri.it/**", liberar_oauth)
 
     try:
-        await page.wait_for_url("*prenotami.esteri.it*", timeout=timeout * 1000)
+        await page.wait_for_url(
+            "() => !window.location.href.includes('iam.esteri.it)", 
+            timeout=timeout * 1000
+        )
+        await asyncio.sleep(2)
         notifier.log("Login OAuth concluído!")
         return True
     except Exception:
