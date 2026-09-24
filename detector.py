@@ -9,8 +9,11 @@ def e_url_oauth(url: str) -> bool:
  
 def e_bloqueio_radware(url: str) -> bool:
     """Retorna True se o Radware bloqueou a requisição."""
-    return "Error.cshtml" in url or "perfdrive" in url
- 
+    return (
+        "Error.cshtml" in url
+        or "perfdrive" in url
+        or "pingid" in url and "esteri.it" not in url
+    )
  
 def e_erro_servidor(conteudo: str) -> bool:
     """Retorna True se o servidor retornou um erro conhecido (500, 404, etc)."""

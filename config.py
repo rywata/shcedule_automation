@@ -31,9 +31,7 @@ class Config:
         "HTTP ERROR 500", "HTTP ERROR 404",
         "não consegue atender",
         "Si è verificato un errore",
-        "elaborazione della richiesta",
-        "Not Found",
-        "The requested URL was not found",
+        "elaborazione della richiesta"
     )
  
  

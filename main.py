@@ -40,8 +40,10 @@ async def main() -> None:
                 notifier.info("\nEncerrado pelo usuário.")
                 break
 
-        await context.close()
-
+        try:
+            await context.close()
+        except Exception:
+            pass
 
 if __name__ == "__main__":
     try:
