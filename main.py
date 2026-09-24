@@ -26,6 +26,7 @@ async def main() -> None:
 
             if resultado == Resultado.SUCESSO:
                 notifier.info(">>> RESERVA CONCLUÍDA!")
+                input("\nPressione Enter para fechar o navegador...")
                 break
 
             if resultado == Resultado.REVERIFICACAO:
@@ -34,10 +35,12 @@ async def main() -> None:
                     await notifier.aguardar_login(CFG.login_wait)
                 else:
                     notifier.info("\n>>> Encerrando por escolha do usuário.")
+                    input("\nPressione Enter para fechar o navegador...")
                     break
 
             if resultado == Resultado.ENCERRADO:
                 notifier.info("\nEncerrado pelo usuário.")
+                input("\nPressione Enter para fechar o navegador...")
                 break
 
         try:
